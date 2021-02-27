@@ -6,15 +6,17 @@ isPartTime=2
 #isPresent=1
 empRatePerHr=20;
 
-if [ $empCheck -eq $isFullTime ]
-   then
+case $empCheck in
+   $isFullTime)
       empHrs=8
-elif [ $empCheck -eq $isPartTime ]
-   then
+   ;;
+   $isPartTime)
       empHrs=4
-else
-   empHrs=0
-fi
+   ;;
+   *)
+      empHrs=0
+   ;;
+esac
 salary=$(($empHrs*$empRatePerHr))
 echo $salary
 
