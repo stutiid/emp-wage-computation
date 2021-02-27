@@ -5,10 +5,15 @@ IS_FULLTIME=1
 IS_PARTTIME=2
 EMP_RATE_PER_HR=20;
 NUMBER_OF_WORKING_DAYS=20
+MAX_HRS_IN_MONTH=100
+
 #variable
-totalSalary=0
-for ((day=1; day<=$NUMBER_OF_WORKING_DAYS; day++))
+totalEmpHrs=0
+totalWorkingDays=0
+
+while [[ $totalEmpHrs -lt $MAX_HRS_IN_MONTH && $totalWorkingDays -lt $NUMBER_OF_WORKING_DAYS ]]
 do
+   ((totalWorkingDays++))
    empCheck=$((RANDOM%3))
    case $empCheck in
       $IS_FULLTIME)
@@ -21,8 +26,10 @@ do
          empHrs=0
       ;;
    esac
-   salary=$(($empHrs*$EMP_RATE_PER_HR))
-   totalSalary=$(($totalSalary+$salary))
+   totalEmpHrs=$(($totalEmpHrs+$empHrs))
+
 done
+
+totalSalary=$(($totalEmpHrs*$EMP_RATE_PER_HR))
 echo $totalSalary
 
