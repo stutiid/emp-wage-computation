@@ -1,11 +1,20 @@
 #!/bin/bash -x
 
-#variables
-empCheck=$((RANDOM%2))
+empCheck=$((RANDOM%3))
+isFullTime=1
+isPartTime=2
+#isPresent=1
+empRatePerHr=20;
 
-if [ $empCheck -eq 0 ]
-then
-	echo absent
+if [ $empCheck -eq $isFullTime ]
+   then
+      empHrs=8
+elif [ $empCheck -eq $isPartTime ]
+   then
+      empHrs=4
 else
-	echo present
+   empHrs=0
 fi
+salary=$(($empHrs*$empRatePerHr))
+echo $salary
+
